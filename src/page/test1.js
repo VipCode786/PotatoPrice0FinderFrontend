@@ -4,7 +4,7 @@ const TopPotatoSellers = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [status, setStatus] = useState("");
   const [progress, setProgress] = useState(0);
-  const [poundsAvailable, setPoundsAvailable] = useState();
+  const [poundsAvailable, setPoundsAvailable] = useState("");
   const [cheapestSellers, setCheapestSellers] = useState([]);
 
   const handleFileChange = (event) => {
@@ -82,31 +82,26 @@ const TopPotatoSellers = () => {
     <h2>Potato Price Finder</h2>
     <h3>{status}</h3>
     <form onSubmit={(e) => handleFileUpload(e)}>
-      
-    
-      <div className="mb-3">
-        <input type="file" className="form-control" required onChange={handleFileChange} />
-        {progress > 0 && (
-         <div className="progress my-3">
-         <div className="progress-bar" role="progressbar" style={{ width: `${progress}%` }} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100"></div>
-       </div>
-        // <progress id="file" className="form-control my-4" value={progress} max="100"></progress>
-      )}
-      </div>
-
       <div className="mb-3">
         <input
           type="number"
           className="form-control"
-          placeholder="Enter the Pounds for check potato availability"
+          placeholder="Pounds available"
           value={poundsAvailable}
-        //   required
+          required
           onChange={(e) => setPoundsAvailable(e.target.value)}
         />
       </div>
-
-
-      <button type="submit" className="btn btn-primary">Check Potato Availability</button>
+      {progress > 0 && (
+         <div className="progress mb-4">
+         <div className="progress-bar" role="progressbar" style={{ width: `${progress}%` }} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100"></div>
+       </div>
+        // <progress id="file" className="form-control my-4" value={progress} max="100"></progress>
+      )}
+      <div className="mb-3">
+        <input type="file" className="form-control" required onChange={handleFileChange} />
+      </div>
+      <button type="submit" className="btn btn-primary">Upload File</button>
     </form>
     <div>
   <h2 className="mt-5">Cheapest Sellers</h2>
@@ -119,7 +114,6 @@ const TopPotatoSellers = () => {
           <th scope="col">Unit Weight</th>
           <th scope="col">Unit Price</th>
           <th scope="col">Unit Quantity</th>
-          <th scope="col">Price Per Pound</th>
         </tr>
       </thead>
       <tbody>
@@ -130,7 +124,6 @@ const TopPotatoSellers = () => {
             <td>{seller["unit weight"]}</td>
             <td>${seller["unit price"]}</td>
             <td>{seller["unit quanitiy"]}</td>
-            <td>${seller["pricePerPound"]}</td>
           </tr>
         ))}
       </tbody>
