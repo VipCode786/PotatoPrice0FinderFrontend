@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import '../css/bootstrap.css'
+import FileDownloader from "./FileDownloader";
 const TopPotatoSellers = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [status, setStatus] = useState("");
@@ -76,9 +77,10 @@ const TopPotatoSellers = () => {
 
   useEffect(() => {
    console.log("cheapestSellers",cheapestSellers)
-  }, [cheapestSellers])
+  }, [cheapestSellers]);
+
   return (
-    <div className="container mt-5">
+    <div>
     <h2>Potato Price Finder</h2>
     <h3>{status}</h3>
     <form onSubmit={(e) => handleFileUpload(e)}>
@@ -140,33 +142,7 @@ const TopPotatoSellers = () => {
   )}
 </div>
 
-    {/* <div>
-      <h2 className="mt-5">Cheapest Sellers</h2>
-      <table className="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Unit Weight</th>
-      <th scope="col">Unit Price</th>
-      <th scope="col">Unit Quantity</th>
-    </tr>
-  </thead>
-  <tbody>
-    {  cheapestSellers?.map((seller, index) => (
-      <tr key={index}>
-        <th scope="row">{index + 1}</th>
-        <td>{seller.name}</td>
-        <td>{seller["unit weight"]}</td>
-        <td>${seller["unit price"]}</td>
-        <td>{seller["unit quanitiy"]}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-
-    
-    </div> */}
+<FileDownloader cheapestSellers={cheapestSellers}/>
   </div>
   );
 };
