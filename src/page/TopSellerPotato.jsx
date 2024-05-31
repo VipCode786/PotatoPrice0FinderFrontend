@@ -101,9 +101,21 @@ const TopPotatoSellers = () => {
           type="number"
           className="form-control"
           placeholder="Enter the Pounds for check potato availability"
-          value={poundsAvailable}
+         // value={poundsAvailable}
         //   required
-          onChange={(e) => setPoundsAvailable(e.target.value)}
+        //  onChange={(e) => setPoundsAvailable(e.target.value)}
+        value={poundsAvailable === null ? '' : poundsAvailable}
+          onChange={(e) => {
+              const value = e.target.value;
+              // Check if value is empty or not a number
+              if (value === '' || isNaN(value)) {
+                  // If empty or not a number, set poundsAvailable to null
+                  setPoundsAvailable(null);
+              } else {
+                  // Otherwise, set poundsAvailable to the parsed number
+                  setPoundsAvailable(parseFloat(value));
+              }
+          }}
         />
       </div>
 
